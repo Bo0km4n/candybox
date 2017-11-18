@@ -11,11 +11,10 @@ type Node struct {
 }
 
 func main() {
-	nodes := make([]Node, 0, 10)
-	var result Node
 	head := mockNode()
 	debugPrint(head)
-	RecurrentFindNode(head, 4, 0, nodes, result)
+	result := RecurrentFindNode(head, 4)
+	fmt.Println(result)
 }
 
 func debugPrint(node *Node) {
@@ -25,20 +24,32 @@ func debugPrint(node *Node) {
 	}
 }
 
-func RecurrentFindNode(node *Node, k int, i int, buffer []Node, result Node) {
-	buffer = append(buffer, *node)
-
-	if node.Next == nil {
-		if k > i {
-			return
-		}
-		fmt.Println(i, k)
-		fmt.Println(buffer[i-k])
-		result = buffer[i-k]
-		return
+func RecurrentFindNode(head *Node, k int) *Node {
+	if k < 0 {
+		return nil
 	}
 
-	RecurrentFindNode(node.Next, k, i+1, buffer, result)
+	p1 := head
+	p2 := head
+
+	for i := 0; i < k-1; i++ {
+		if p2 == nil {
+			return nil
+		}
+		p2 = p2.Next
+	}
+	if p2 == nil {
+		return nil
+	}
+
+	for {
+		if p2.Next == nil {
+			break
+		}
+		p1 = p1.Next
+		p2 = p2.Next
+	}
+	return p1
 }
 
 func mockNode() *Node {
