@@ -21,6 +21,5 @@ func updateBits(n, m, i, j int) uint32 {
 	n_cleared := uint32(n2) & mask
 	m_shifted := uint32(m2) << uint32(i)
 
-	fmt.Printf("%b\n", n_cleared|m_shifted)
-	return 0
+	return n_cleared | m_shifted
 }
