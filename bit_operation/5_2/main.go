@@ -6,17 +6,17 @@ import (
 )
 
 func main() {
-	fmt.Println(printBinary(0.3))
+	fmt.Println(printBinary(0.1))
 }
 
 func printBinary(n float64) string {
-	binary := make([]string, 0, 32)
+	binary := make([]string, 0)
 	binary = append(binary, "0.")
 	for {
 		if n <= 0 {
 			break
 		}
-		if len(binary) >= 32 {
+		if len(binary) >= 34 {
 			return "ERROR"
 		}
 		r := n * 2
